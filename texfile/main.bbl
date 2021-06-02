@@ -1,0 +1,20 @@
+\begin{thebibliography}{1}
+
+\bibitem{reddiConvergenceAdam2019}
+Sashank~J. Reddi, Satyen Kale, and Sanjiv Kumar.
+\newblock On the {{Convergence}} of {{Adam}} and {{Beyond}}.
+\newblock {\em arXiv:1904.09237 [cs, math, stat]}, April 2019.
+
+\bibitem{keskarImprovingGeneralizationPerformance2017}
+Nitish~Shirish Keskar and Richard Socher.
+\newblock Improving {{Generalization Performance}} by {{Switching}} from
+  {{Adam}} to {{SGD}}.
+\newblock {\em arXiv:1712.07628 [cs, math]}, December 2017.
+
+\bibitem{johnsonAcceleratingStochasticGradient}
+Rie Johnson and Tong Zhang.
+\newblock Accelerating {{Stochastic Gradient Descent}} using {{Predictive
+  Variance Reduction}}.
+\newblock page~9.
+
+\end{thebibliography}
