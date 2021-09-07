@@ -272,6 +272,19 @@ function generate_BTree(s::Int)::Vector{Node}
 end
     
 # configure next sample state in Markov chain 
+# function next(tmp::Vector{Int8})
+#     l = length(tmp)
+#     new = deepcopy(tmp)
+#     for i in 1:2:l-1
+#         if tmp[i] != tmp[i+1]
+#             new[i] = tmp[i+1]
+#             new[i+1] = tmp[i]
+#         end
+#     end
+#     selected = StatsBase.sample(1:l,Int(ceil(l/10)),replace=false,ordered=true)
+#     new[selected] = 3 .- new[selected]
+#     return new
+# end
 function next(tmp::Vector{Int8})
     l = length(tmp)
     new = deepcopy(tmp)
@@ -281,7 +294,7 @@ function next(tmp::Vector{Int8})
             new[i+1] = tmp[i]
         end
     end
-    selected = StatsBase.sample(1:l,Int(ceil(l/10)),replace=false,ordered=true)
+    selected = StatsBase.sample(1:l,1,replace=false,ordered=true)
     new[selected] = 3 .- new[selected]
     return new
 end
@@ -567,7 +580,7 @@ function mkSGD(mps1::MPS, H; step=20, chainlen=200, η=0.005, progress=false)
         g = grad
         for i in 1:mps_size
 #             mps.site[i].data[:] = mps.site[i].data - η*g[i]
-            mps.site[i].data[:] = mps.site[i].data - η*(1/(i/500+1))*g[i]
+            mps.site[i].data[:] = mps.site[i].data - η*(1/(i/5000+1))*g[i]
         end
 #         val[j+1] = exact_energy(mps)
         val[j] = energy1

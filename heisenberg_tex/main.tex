@@ -1,0 +1,123 @@
+%!TEX program = xelatex
+
+% \documentclass{ctexart}
+\documentclass{article}
+% \usepackage[utf8]{inputenc}
+\usepackage{xeCJK}
+
+\title{Notes}
+\author{Yuxin Sun}
+
+
+\usepackage[super,square]{natbib}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{setspace}
+ \geometry{
+ a4paper,
+%  total={170mm,257mm},
+ left=30mm,
+ right=30mm,
+ top=30mm,
+ bottom=25mm
+ }
+\linespread{1.6}
+\newcommand{\E}[1]{\mathrm{E}\left[#1\right]}
+\newcommand{\bra}[1]{\left\langle #1\right\rvert}
+\newcommand{\ket}[1]{\left\lvert #1\right\rangle}
+\begin{document}
+\maketitle
+
+\section*{Heisenberg Model}
+\subsection*{2-site model}
+For 2-site OBC model, the Hamiltonian is 
+\[
+    \mathbf{H} = \frac12\vec{\mathbf{\sigma}}_1 \cdot \frac12\vec{\mathbf{\sigma}}_2
+\]
+\[
+    H = \begin{pmatrix}
+        0.25 & 0 & 0  & 0\\
+        0 &-0.25 &0.5 & 0\\
+        0 & 0.5  &-0.25&0\\
+        0 & 0 & 0 & 0.25\\
+    \end{pmatrix}
+\]
+Eigen values: $\{-0.75, 0.25, 0.25, 0.25\}$, vigenvector of lowest energy:
+\[
+    \frac{\sqrt{2}}{2}\left(\ket{10} - \ket{01}\right)
+\]
+for PBC we just need to double the energy.
+See Figure\ref{fig:site2} for results.
+\begin{figure}[!ht]
+	\centering
+    \includegraphics[width=\textwidth]{Adam_2site_PBC.pdf}\\
+    \includegraphics[width=\textwidth]{SGD_2site_PBC.pdf}\\
+    \includegraphics[width=\textwidth]{SVRG_2site_PBC.pdf}
+	\caption{y: $\log_{10}\lvert E-E_0 \rvert$, x: steps}
+    \label{fig:site2}
+\end{figure}
+
+\subsection*{3-site model}
+recall previous $H$ as $h_2$,
+\[
+    h_3 = h_2\otimes I + I \otimes h_2 
+        + \sum \frac12\sigma_i\otimes I\otimes \frac12\sigma_i
+\]
+we get eigenvalues $\{-0.75, 0.75\}$ 4 times for each valus.
+the states are (not renormalized)
+    \begin{align*}
+        &\ket{110}-\ket{101}\\
+        &\ket{010}-\ket{100}\\
+        2&\ket{011}-\ket{110}-\ket{101}\\
+        2&\ket{001}-\ket{010}-\ket{100}\\
+    \end{align*}
+or first 4 rows in the following matrix:
+\[
+    \begin{pmatrix}
+        0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 1.0 & 0.0\\
+        0.707 & 0.0 & -0.408 & 0.0 & -0.577 & 0.0 & 0.0 & 0.0\\
+        -0.707 & 0.0 & -0.408 & 0.0 & -0.577 & 0.0 & 0.0 & 0.0\\
+        0.0 & -0.707 & 0.0 & -0.408 & 0.0 & -0.577 & 0.0 & 0.0\\
+        0.0 & 0.0 & 0.816 & 0.0 & -0.577 & 0.0 & 0.0 & 0.0\\
+        0.0 & 0.707 & 0.0 & -0.408 & 0.0 & -0.577 & 0.0 & 0.0\\
+        0.0 & 0.0 & 0.0 & 0.816 & 0.0 & -0.577 & 0.0 & 0.0\\
+        0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 1.0\\     
+    \end{pmatrix}
+\]
+\begin{figure}[!ht]
+	\centering
+    \includegraphics[width=\textwidth]{Adam_3site_PBC.pdf}\\
+    \includegraphics[width=\textwidth]{Adam_3site_PBC2.pdf}
+	\caption{y1: $\log_{10}\lvert E-E_0 \rvert$, y2: $E-E_0$, x: steps}
+\end{figure}
+
+
+\subsection*{4-site model}
+same as above, we get the lowest energy $E=-2$. The corresponding Eigenvector
+is
+\begin{align*}
+    &\ket{1100}+\ket{1001}+\ket{0110}+\ket{0011}\\
+    &-2\ket{1010}-2\ket{0101}
+\end{align*}
+
+\begin{figure}[!h]
+	\centering
+\includegraphics[width=\textwidth]{Adam_4site_PBC.pdf}
+	\caption{y: $\log\lvert E-E_0 \rvert$, x: steps}
+	\label{fig:SGD_Adam_PBC}
+\end{figure}
+
+
+
+
+% \begin{figure}[h!]
+% \centering
+% \includegraphics[scale=1.7]{universe}
+% \caption{The Universe}
+% \label{fig:universe}
+% \end{figure}
+
+\bibliographystyle{unsrt}
+\bibliography{references}
+\end{document}
