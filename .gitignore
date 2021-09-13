@@ -27,5 +27,6 @@ Manifest.toml
 *.svg
 *.jpg
 *.pdf
+*.zip
 
 !/save/*
